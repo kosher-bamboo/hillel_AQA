@@ -38,7 +38,7 @@ print(adwentures_of_tom_sawer)
 """ Зробіть так, щоб у тексті було не більше одного пробілу між словами.
 """
 print("\ntask 03")
-adwentures_of_tom_sawer = adwentures_of_tom_sawer.replace("  ", "")
+adwentures_of_tom_sawer = " ".join(adwentures_of_tom_sawer.split())
 print(adwentures_of_tom_sawer)
 
 # task 04
