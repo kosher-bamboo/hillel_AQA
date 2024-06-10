@@ -14,7 +14,7 @@ people_records = [
     ('David', 'Miller', 33, 'Software Developer', 'Austin'),
     ('Olivia', 'Wilson', 27, 'Marketing Specialist', 'Denver'),
     ('Daniel', 'Taylor', 38, 'Architect', 'Portland'),
-    ('Grace', 'Moore', 25, 'Graphic Designer', 'Miami'),
+    ('Grace', 'Moore', 250, 'Graphic Designer', 'Miami'),
     ('Samuel', 'Jones', 50, 'Business Consultant', 'Atlanta'),
     ('Emma', 'Hall', 31, 'Chef', 'Dallas'),
     ('William', 'Clark', 29, 'Financial Analyst', 'Houston'),
@@ -26,17 +26,12 @@ people_records.insert(0, ('Oleksandr', 'Marar', 31, 'Engineer', 'Odesa'))
 print(f"#1. Updated list: {people_records}")
 
 
-index_5 = people_records.pop(5)
-index_1 = people_records.pop(1)
-people_records.insert(1, index_5)
-people_records.insert(5, index_1)
+people_records[1], people_records[5] = people_records[5], people_records[1]
 print(f"\n#2. Swapped items 1 and 5: {people_records}")
 
 
 print("\n#3. ")
-if int(people_records[6][2]) >= 30:
-    print(f"{people_records[6][0]} {people_records[6][1]}'s age is >= 30. It's {people_records[6][2]}")
-if int(people_records[10][2]) >= 30:
-    print(f"{people_records[10][0]} {people_records[10][1]}'s age is >= 30. It's {people_records[10][2]}")
-if int(people_records[13][2]) >= 30:
-    print(f"{people_records[13][0]} {people_records[13][1]}'s age is >= 30. It's {people_records[13][2]}")
+if int(people_records[6][2]) >= 30 and int(people_records[10][2]) >= 30 and int(people_records[13][2]) >= 30:
+    print("People's age is >= 30.")
+else:
+    print("Not all people with indexes 6, 10, 13 have age >= 30")
