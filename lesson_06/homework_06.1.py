@@ -6,8 +6,6 @@
 value = input("Enter value:")
 input_set = len(set(value))
 
-print(input_set)
-
 if input_set > 10:
     print(True)
 else:
