@@ -14,7 +14,7 @@ people_records = [
     ('David', 'Miller', 33, 'Software Developer', 'Austin'),
     ('Olivia', 'Wilson', 27, 'Marketing Specialist', 'Denver'),
     ('Daniel', 'Taylor', 38, 'Architect', 'Portland'),
-    ('Grace', 'Moore', 250, 'Graphic Designer', 'Miami'),
+    ('Grace', 'Moore', 25, 'Graphic Designer', 'Miami'),
     ('Samuel', 'Jones', 50, 'Business Consultant', 'Atlanta'),
     ('Emma', 'Hall', 31, 'Chef', 'Dallas'),
     ('William', 'Clark', 29, 'Financial Analyst', 'Houston'),
