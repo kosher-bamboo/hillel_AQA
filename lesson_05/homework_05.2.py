@@ -34,10 +34,9 @@ print(f"\n#2. Swapped items 1 and 5: {people_records}")
 
 
 print("\n#3. ")
-# 3 - check that all people in modified list with records indexes 6, 10, 13 have age >=30. Print condition check result
 if int(people_records[6][2]) >= 30:
-    print(f"{people_records[6][0]} {people_records[6][1]}'s age is >= 30_6. It's {people_records[6][2]}")
+    print(f"{people_records[6][0]} {people_records[6][1]}'s age is >= 30. It's {people_records[6][2]}")
 if int(people_records[10][2]) >= 30:
-    print(f"{people_records[10][0]} {people_records[10][1]}'s age is >= 30_10. It's {people_records[10][2]}")
+    print(f"{people_records[10][0]} {people_records[10][1]}'s age is >= 30. It's {people_records[10][2]}")
 if int(people_records[13][2]) >= 30:
-    print(f"{people_records[13][0]} {people_records[13][1]}'s age is >= 30_13. It's {people_records[13][2]}")
+    print(f"{people_records[13][0]} {people_records[13][1]}'s age is >= 30. It's {people_records[13][2]}")
