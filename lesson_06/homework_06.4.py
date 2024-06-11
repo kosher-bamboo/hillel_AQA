@@ -6,4 +6,4 @@ even_numbers_sum = 0
 for element in list_01:
     if element%2 == 0:
         even_numbers_sum += element
-print(even_numbers_sum)
+print(f"Sum of even numbers is: {even_numbers_sum}")
