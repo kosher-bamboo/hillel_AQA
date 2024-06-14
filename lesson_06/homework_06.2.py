@@ -2,14 +2,11 @@
 # (враховуються як великі так і маленькі).
 # Цикл не повинен завершитися, якщо користувач ввів слово без букви "h".
 
-# input_value = input("Enter something with char 'h':")
-input_value = "sdfdafasHh"
-unique_chars_set = set(input_value)
-print(unique_chars_set)
-print(len(unique_chars_set))
 
-chars = 0
-# while len(unique_chars_set)
-for char in unique_chars_set:
-    if char == 'H' or char == 'h':
-        print("success")
+char_h = 0
+while char_h < 1:
+    input_value = input("Enter something with char 'H' or 'h': ")
+    if 'H' in input_value or 'h' in input_value:
+        print("Great!")
+        char_h = 1
+
