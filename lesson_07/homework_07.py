@@ -65,13 +65,11 @@ standart_string = "Написати функцію, яка приймає ряд
 print(standart_string)
 print(f"reverce string: {reverce_string(standart_string)}")
 
-
 # task 5 "Написати функцію, яка приймає список слів та повертає найдовше слово у списку."
 print("\ntask 05")
 
 
 def longest_word(initial_string):
-
     # initialize new dict
     words_dict = {}
     words = set(initial_string.split())  # the set of unique words
@@ -101,11 +99,11 @@ def find_substring(str1, str2):
 
 str1 = "Hello, world!"
 str2 = "world"
-print(find_substring(str1, str2)) # поверне 7
+print(find_substring(str1, str2))  # поверне 7
 
 str1 = "The quick brown fox jumps over the lazy dog"
 str2 = "cat"
-print(find_substring(str1, str2)) # поверне -1
+print(find_substring(str1, str2))  # поверне -1
 
 # task 8
 # task 9
@@ -124,12 +122,12 @@ print("\ntask 07")
 
 
 def unique_symbols(input_value):
-
     # transform list to set for unique symbols and count it
     value_unique_length = len(set(input_value))
 
     # check the number of unique sumbols; True if > 10, Else is < 10
     return True if value_unique_length > 10 else False
+
 
 input_value = "weiruyweiur"
 print(unique_symbols(input_value))
@@ -137,19 +135,17 @@ print(unique_symbols(input_value))
 input_value = "czmbn sdfkladj ewyruioweqy zxcvm,zb sadfasd"
 print(unique_symbols(input_value))
 
-
 # Є ліст з числами, порахуйте сумму усіх ПАРНИХ чисел в цьому лісті
 print("\ntask 08")
 
 
 def even_number_sum(input_list):
-
     # initialize variable to sum even numbers
     even_numbers_sum = 0
 
     # found even numbers in the input range and sum it
     for element in input_list:
-        if element%2 == 0:  # find evenly divided numbers
+        if element % 2 == 0:  # find evenly divided numbers
             even_numbers_sum += element  # sum evenly divided numbers
     return even_numbers_sum
 
@@ -161,7 +157,6 @@ print("\ntask 09")
 
 
 def count_title_words(input_text):
-
     # initialize new list
     title_words_array = []
 
@@ -170,6 +165,7 @@ def count_title_words(input_text):
         if word.istitle():  # check if word begins with a capital letter
             title_words_array.append(word)  # add such words in the list
     return len(title_words_array)
+
 
 input_text = """Tom gave up the brush with reluctance in his face but alacrity in his heart. 
 And while the late steamer "Big Missouri" worked and sweated in the sun, 
@@ -188,7 +184,6 @@ print("\ntask 10")
 
 
 def string_only(initial_list):
-
     # initialize new list
     string_only_list = []
 
@@ -197,6 +192,7 @@ def string_only(initial_list):
             string_only_list.append(item)  # add such items to the list
     return string_only_list
 
+
 initial_list = [-94.79, 'vjqbxrguip', -58, '19', 60, 'True', True, '-43', 'okqnacfc', False, 43, 54, 40, 'bcx', 5,
-          'qiqvcvwyln', True, 'zsqbqbmw', 'z', 'qcj']
+                'qiqvcvwyln', True, 'zsqbqbmw', 'z', 'qcj']
 print(string_only(initial_list))
