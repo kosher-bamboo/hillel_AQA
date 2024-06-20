@@ -1,4 +1,4 @@
-new_list = ["1,2,3,4", "1,2,3,4,50", "qwerty1,2,3"]
+new_list = ["1,2,3,4", "1,2,3,4,50", "qwerty1,2,3", "23,12,2,8", "34,df,we"]
 
 
 def sum_all_number(new_list):
