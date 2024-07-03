@@ -3,11 +3,14 @@ import pytest
 from lesson_09.functions import find_strings
 
 
-def test_find_strings_none():
-    with pytest.raises(TypeError):
-        find_strings(None)
+input_values = (None, 24)
+expected = (TypeError, TypeError)
+zip_params = (list(zip(input_values, expected)))
 
 
-def test_find_strings_number():
+@pytest.mark.negative
+@pytest.mark.find_strings
+@pytest.mark.parametrize("input_values, expected", zip_params, ids=input_values)
+def test_find_strings_negative(input_values, expected):
     with pytest.raises(TypeError):
-        find_strings(24)
+        find_strings(input_values)

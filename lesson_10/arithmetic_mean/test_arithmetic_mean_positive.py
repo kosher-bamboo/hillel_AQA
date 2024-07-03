@@ -3,6 +3,7 @@ import pytest
 
 from lesson_07.homework_07 import arithmetic_mean
 
+
 @pytest.mark.positive
 @pytest.mark.arithmetic_mean
 class TestArithmeticMeanPositive:
