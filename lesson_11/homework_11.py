@@ -23,8 +23,7 @@ def log_event(username: str, status: str):
     logging.basicConfig(
         filename='login_system.log',
         level=logging.INFO,
-        format='%(asctime)s - %(message)s',
-        force=True
+        format='%(asctime)s - %(message)s'
         )
     logger = logging.getLogger("log_event")
 
