@@ -2,7 +2,7 @@ import pytest
 
 from lesson_07.homework_07 import even_number_sum
 
-input_values = [range(11), [-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11], []]
+input_values = [range(11), list(range(-11,0)), []]
 expected = [30, -30, 0]
 zip_params = list(zip(input_values, expected))
 
