@@ -23,5 +23,6 @@ print(f"Student {student_1.first_name} {student_1.second_name} is {student_1.age
       f"His average grade is {student_1.average_grade}")
 
 student_1.update_average_grade(90)
+
 print(f"Student {student_1.first_name} {student_1.second_name} is {student_1.age}. "
       f"His average grade is {student_1.average_grade}")
