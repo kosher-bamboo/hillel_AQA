@@ -17,10 +17,12 @@ class Student:
     def update_average_grade(self, updated_average_grade):
         self.average_grade = updated_average_grade
 
+    def __str__(self):
+        return f"Student {self.first_name} {self.second_name} is {self.age}. His average grade is {self.average_grade}"
+
 
 student_1 = Student(first_name="John", second_name="Doe", age="30", average_grade=80)
-print(f"Student {student_1.first_name} {student_1.second_name} is {student_1.age}. "
-      f"His average grade is {student_1.average_grade}")
+print(student_1.__str__())
 
 student_1.update_average_grade(90)
 
