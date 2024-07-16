@@ -22,7 +22,7 @@ class Student:
 
 
 student_1 = Student(first_name="John", second_name="Doe", age="30", average_grade=80)
-print(student_1.__str__())
+print(student_1)
 
 student_1.update_average_grade(90)
 
