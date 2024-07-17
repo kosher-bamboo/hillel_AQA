@@ -162,7 +162,8 @@ class Trapezoid(GeometricFigure):
         self.__height = height
 
     def __setattr__(self, key, value):
-        if key in ("_Trapezoid__base_side_1", "_Trapezoid__base_side_2", "_Trapezoid__side_1", "_Trapezoid__side_2", "_Trapezoid__height"):
+        if key in ("_Trapezoid__base_side_1", "_Trapezoid__base_side_2", "_Trapezoid__side_1", "_Trapezoid__side_2",
+                   "_Trapezoid__height"):
             if type(value) in (int, float) and value > 0:
                 super().__setattr__(key, value)
             else:
@@ -201,4 +202,3 @@ class Circle(GeometricFigure):
 
     def __str__(self):
         return "Circle"
-
