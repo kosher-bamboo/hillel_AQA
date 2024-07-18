@@ -25,10 +25,9 @@ M = 1, y = 2, n = 2, ...(або в іншому форматі, це не при
 Підказка: це про словники, get можна використати для тотго щоб витягнути чи є ключ без помилки та надати дефолтне значення
 """
 
-# user_input = input()
-user_input = "My name is Emmy Santiago"
+user_input = input("Enter text: ")
 
-new_dict = {x: user_input.count(x) for x in user_input}
+new_dict = {x: user_input.count(x) for x in user_input if x in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"}
 
 print(new_dict)
 
@@ -38,7 +37,7 @@ print(new_dict)
 2 строка це рішення
 """
 
-user_input = "My name is Emmy Santiago"
-new_set = {f"{x} = {user_input.count(x)}" for x in user_input}
+user_input = input("Enter text: ")
+new_set = {f"{x} = {user_input.count(x)}" for x in user_input if x in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"}
 
 print(new_set)
