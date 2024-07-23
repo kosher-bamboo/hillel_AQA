@@ -24,7 +24,7 @@ class WrongOperatorError(Exception):
         super().__init__(message)
 
 
-def calculator(input_prompt_splited):
+def calculator():
     attempt = 0
     while attempt < 3:
         input_prompt_splited = input("calculate: ").split()
