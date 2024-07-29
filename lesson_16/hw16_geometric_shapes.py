@@ -13,5 +13,5 @@ list_of_figures = [square, triangle, rectangle, parallelogram, rhombus, trapezoi
 
 for figure in list_of_figures:
     print(figure.__class__.__name__)
-    print(f"    Perimeter: {figure.geometric_figure_perimeter()}")
-    print(f"    Square: {figure.geometric_figure_square()}")
+    print(f"\tPerimeter: {figure.geometric_figure_perimeter()}")
+    print(f"\tSquare: {figure.geometric_figure_square()}")
