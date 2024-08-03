@@ -1,26 +1,29 @@
 print('Реалізуйте ітератор для зворотного виведення елементів списку.')
+
+
 class RevertIterator:
-    def __init__(self, last):
-        self.last_item = last + 1
-        self.first_item = 1
+    def __init__(self, list):
+        self.reverce_list = list[::-1]
+        self.last_item = len(self.reverce_list) - 1
+        self.first_item = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.last_item > self.first_item:
-            self.last_item -= 1
-            return self.last_item
-        else:
+        if self.first_item > self.last_item:
             raise StopIteration
+        else:
+            self.first_item += 1
+            return self.reverce_list[self.first_item - 1]
 
 
-revert = RevertIterator(10)
+list_of_items = ['1', '2', 3, 4, 5, None, 'asd']
+revert = RevertIterator(list_of_items)
 for num in revert:
     print(num)
 
-
-print("-"*10)
+print("-" * 10)
 print('Напишіть ітератор, який повертає всі парні числа в діапазоні від 0 до N.')
 
 
