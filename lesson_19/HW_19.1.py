@@ -19,8 +19,3 @@ if responce.status_code == 200:
             print('Error. Status code: ', responce.status_code)
 else:
     print('Error. Status code: ', responce.status_code)
-
-# with open('mars_rover.jpg', 'wb') as file:
-#     file.write(responce.content)
-
-# photos = responce_data['photos']
