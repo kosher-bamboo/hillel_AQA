@@ -13,17 +13,17 @@ def upload_image(file_name):
         files = {'image': file}
         # make POST request to upload endpoint
         response = requests.post(base_url + upload_endpoint, files=files)
-        # check response status code
-        if response.status_code == 201:
-            # handle the response from the server to extract image URL
-            response_data = json.loads(response.text)
-            image_url = response_data['image_url']
-            print(f"image successfully uploaded: {image_url}")
-        else:
-            print(f"Invalid upload. Status code: {response.status_code}")
+    # check response status code
+    if response.status_code == 201:
+        # handle the response from the server to extract image URL
+        response_data = json.loads(response.text)
+        image_url = response_data['image_url']
+        print(f"image successfully uploaded: {image_url}")
+    else:
+        print(f"Invalid upload. Status code: {response.status_code}")
 
 
-def download_image(file_name):
+def download_image_url(file_name):
     # declare proper Content-Type for server to get uploaded image URL
     headers = {'Content-Type': 'text'}
     # make GET request to image endpoint
@@ -34,6 +34,23 @@ def download_image(file_name):
         response_data = json.loads(response.text)
         uploaded_image_url = response_data['image_url']
         print(f"uploaded image url: {uploaded_image_url}")
+    else:
+        print(f"Error. Status code: {response.status_code}")
+
+
+def download_image(file_name):
+    # declare proper Content-Type for server to get uploaded image URL
+    headers = {'Content-Type': 'image'}
+    # make GET request to image endpoint
+    response = requests.get(base_url + image_endpoint + file_name, headers=headers)
+    # check response status code
+    if response.status_code == 200:
+        # handle the response from a server
+        with open(file_name, 'wb') as file:
+            file.write(response.content)
+        # response_data = json.loads(response.text)
+        # uploaded_image_url = response_data['image_url']
+        print("file downloaded")
     else:
         print(f"Error. Status code: {response.status_code}")
 
@@ -51,6 +68,7 @@ def delete_uploaded_image(file_name):
         print(f"Error. Status code: {response.status_code}")
 
 
-upload_image('mars_rover_102693.jpg')
-download_image('mars_rover_102693.jpg')
-delete_uploaded_image('mars_rover_102693.jpg')
+# upload_image('mars_rover_102693.jpg')
+# download_image_url('mars_rover_102693.jpg')
+# download_image('mars_rover_102693.jpg')
+# delete_uploaded_image('mars_rover_102693.jpg')
