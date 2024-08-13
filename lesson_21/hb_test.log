@@ -1,0 +1,15 @@
+2024-08-13 18:05:58,420 - root - ERROR - Difference is: 35 seconds
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 04:51:17 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 04:50:42 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+2024-08-13 18:05:58,420 - root - ERROR - Difference is: 35 seconds
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 03:39:11 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 03:38:36 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+2024-08-13 18:05:58,421 - root - ERROR - Difference is: 36 seconds
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 02:27:06 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 02:26:30 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+2024-08-13 18:05:58,421 - root - WARNING - Difference is: 32 seconds
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 01:35:10 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 01:34:38 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+2024-08-13 18:05:58,421 - root - ERROR - Difference is: 35 seconds
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 01:14:58 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
+{ Trade (101, len 36) Queue 0 PriceClass 1 Timestamp 01:14:23 Key TSTFEED0300|7E3E|0400 TradePrice 5 TradeSize 0 }
