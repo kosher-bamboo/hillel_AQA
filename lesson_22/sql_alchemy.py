@@ -162,6 +162,7 @@ list_of_students = [
 """
 student = StudentsTable(name=fake.name())
 course = CoursesTable(course_title=fake.random_element(list_of_courses))
+student.course.append(course)
 session.add(student)
 session.commit()
 
@@ -171,12 +172,12 @@ session.commit()
 """
 Напишіть запити до бази даних, які повертають інформацію про студентів, зареєстрованих на певний курс
 """
-# db_courses = (session.query(StudentsTable)
-#               .join(CoursesTable, StudentsTable.courses)
-#               .filter(CoursesTable.course_title == 'Introduction to Psychology').all())
+db_courses = (session.query(StudentsTable)
+              .join(CoursesTable, StudentsTable.courses)
+              .filter(CoursesTable.course_title == 'Introduction to Psychology').all())
 
-# for item in db_courses:
-#     print(f'{item.name} study at {item.courses[0].course_title}')
+for item in db_courses:
+    print(f'{item.name} study at {item.courses[0].course_title}')
 
 # db_course = session.query(StudentsTable).join(CoursesTable).filter(CoursesTable.course_title == 'Organic Chemistry').all()
 # for item in db_course:

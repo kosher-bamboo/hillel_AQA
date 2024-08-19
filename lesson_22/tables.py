@@ -7,7 +7,7 @@ association_table = Table(
     'association_table',
     Base.metadata,
     Column('student_id', Integer, ForeignKey('students.id'), primary_key=True),
-    Column('course_id', Integer, ForeignKey('courses.course_id', primary_key=True))
+    Column('course_id', Integer, ForeignKey('courses.course_id'), primary_key=True)
 )
 
 
