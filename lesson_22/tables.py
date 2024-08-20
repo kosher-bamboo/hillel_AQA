@@ -7,15 +7,14 @@ association_table = Table(
     'association_table',
     Base.metadata,
     Column('student_id', Integer, ForeignKey('students.id'), primary_key=True),
-    Column('course_id', Integer, ForeignKey('courses.course_id'), primary_key=True)
+    Column('course_title', String, ForeignKey('courses.course_title'), primary_key=True)
 )
 
 
 class CoursesTable(Base):
     __tablename__ = 'courses'
 
-    course_id = Column(Integer, primary_key=True)
-    course_title = Column(String)
+    course_title = Column(String, primary_key=True)
 
     students = relationship('StudentsTable', secondary=association_table, back_populates='courses')
 
