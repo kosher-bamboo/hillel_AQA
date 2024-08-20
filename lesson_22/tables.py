@@ -17,7 +17,7 @@ class CoursesTable(Base):
     course_id = Column(Integer, primary_key=True)
     course_title = Column(String)
 
-    students = relationship('StudentsTable', secondary=association_table, back_populates='course')
+    students = relationship('StudentsTable', secondary=association_table, back_populates='courses')
 
 
 class StudentsTable(Base):
@@ -26,4 +26,4 @@ class StudentsTable(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
 
-    course = relationship('CoursesTable', secondary=association_table, back_populates='students')
+    courses = relationship('CoursesTable', secondary=association_table, back_populates='students')
