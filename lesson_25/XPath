@@ -38,7 +38,7 @@ For page https://qauto2.forstudy.space/
 //footer//p
 
 
-For gage https://qauto2.forstudy.space/panel/instructions
+For page https://qauto2.forstudy.space/panel/instructions
 
 # sidebar elements
 //*[contains(@class, 'sidebar')]/a
