@@ -31,13 +31,11 @@ For page https://qauto2.forstudy.space/
 # checkbox on Log in pop-up
 //div[@class='modal-content']//input[@type='checkbox']
 
-
 # footer
 //footer
 
 # all texts on footer
 //footer//p
-
 
 
 For gage https://qauto2.forstudy.space/panel/instructions
@@ -72,3 +70,6 @@ For gage https://qauto2.forstudy.space/panel/instructions
 
 # instruction links
 //a[@class="instruction-link"]
+
+# instruction file
+//a//a[contains(@href, '.pdf')]

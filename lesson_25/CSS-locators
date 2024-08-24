@@ -1,0 +1,75 @@
+For page https://qauto2.forstudy.space/
+
+#Sing In button
+//button[text()='Sign In']
+
+# exact image and all .jpg-images
+img[src='/assets/images/homepage/info_1.jpg']
+img[src*='jpg']
+
+# socials block and all socials
+div[class*='social']
+div[class*='social'] > a
+
+# socials block and all socials
+.contacts_socials.socials
+.contacts_socials.socials > a
+
+# youtube iframe
+iframe[src*='youtube']
+
+#login fields
+input[name]
+input[name='email']
+
+# all buttons on Log in pop-up
+div.modal-content button
+
+# email and password inputs
+div.modal-content input[id*='signin']
+
+# checkbox on Log in pop-up
+div.modal-content input[type='checkbox']
+
+# footer
+footer.footer
+
+# all texts on footer
+footer p
+
+
+For gage https://qauto2.forstudy.space/panel/instructions
+
+# sidebar elements
+.sidebar a
+
+# Garage button on sidebar
+*[routerlink='garage']
+
+# all links to Garage
+*[href='/panel/garage']
+
+# find Instructions button by its name
+//a[text()=' Instructions ']
+
+# Brand select and model select dropdowns
+#brandSelectDropdown
+#modelSelectDropdown
+
+# Search button
+//button[text()='Search']
+
+# User photo
+img[alt='User photo']
+
+# all brands
+#brandSelectDropdown + ul > li
+
+# all models for selected brand
+#modelSelectDropdown ~ ul > li
+
+# instruction links
+//a[@class="instruction-link"]
+
+# instruction file
+a a[href*=".pdf"]
