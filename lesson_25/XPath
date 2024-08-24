@@ -49,7 +49,7 @@ For gage https://qauto2.forstudy.space/panel/instructions
 # all links to Garage
 //*[@href="/panel/garage"]
 
-# find Instructions button by its name
+# find Instructions button on sidebar by its name
 //a[text()=' Instructions ']
 
 # Brand select and model select dropdowns
@@ -71,5 +71,5 @@ For gage https://qauto2.forstudy.space/panel/instructions
 # instruction links
 //a[@class="instruction-link"]
 
-# instruction file
+# instruction file links
 //a//a[contains(@href, '.pdf')]

@@ -1,7 +1,7 @@
 For page https://qauto2.forstudy.space/
 
 #Sing In button
-//button[text()='Sign In']
+.header_right .header_signin
 
 # exact image and all .jpg-images
 img[src='/assets/images/homepage/info_1.jpg']
@@ -49,15 +49,15 @@ For gage https://qauto2.forstudy.space/panel/instructions
 # all links to Garage
 *[href='/panel/garage']
 
-# find Instructions button by its name
-//a[text()=' Instructions ']
+# find Instructions button on sidebar
+.sidebar a[href='/panel/instructions']
 
 # Brand select and model select dropdowns
 #brandSelectDropdown
 #modelSelectDropdown
 
 # Search button
-//button[text()='Search']
+button[class*='search']
 
 # User photo
 img[alt='User photo']
@@ -69,7 +69,7 @@ img[alt='User photo']
 #modelSelectDropdown ~ ul > li
 
 # instruction links
-//a[@class="instruction-link"]
+a[class="instruction-link"]
 
-# instruction file
-a a[href*=".pdf"]
+# instruction file links
+a a[href$=".pdf"]
