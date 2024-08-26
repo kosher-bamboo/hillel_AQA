@@ -1,0 +1,75 @@
+For page https://qauto2.forstudy.space/
+
+#Sing In button
+//button[text()='Sign In']
+
+# exact image and all .jpg-images
+//img[@src='/assets/images/homepage/info_1.jpg']
+//img[contains(@src, 'jpg')]
+
+# socials block and all socials
+//div[contains(@class, 'social')]
+//div[contains(@class, 'social')]/child::a
+
+# socials block and all socials
+//*[@class='contacts_socials socials']
+//*[@class='contacts_socials socials']/a
+
+# youtube iframe
+//iframe[contains(@src, 'youtube')]
+
+#login fields
+//input[@name]
+//input[@name='email']
+
+# all buttons on Log in pop-up
+//div[@class='modal-content']//button
+
+# email and password inputs
+//div[@class='modal-content']//input[contains(@id, 'signin')]
+
+# checkbox on Log in pop-up
+//div[@class='modal-content']//input[@type='checkbox']
+
+# footer
+//footer
+
+# all texts on footer
+//footer//p
+
+
+For page https://qauto2.forstudy.space/panel/instructions
+
+# sidebar elements
+//*[contains(@class, 'sidebar')]/a
+
+# Garage button on sidebar
+//*[@routerlink="garage"]
+
+# all links to Garage
+//*[@href="/panel/garage"]
+
+# find Instructions button on sidebar by its name
+//a[text()=' Instructions ']
+
+# Brand select and model select dropdowns
+//*[@id='brandSelectDropdown']
+//*[@id='modelSelectDropdown']
+
+# Search button
+//button[text()='Search']
+
+# User photo
+//img[@alt='User photo']
+
+# all brands
+//*[@id='brandSelectDropdown']//following-sibling::ul//child::li
+
+# all models for selected brand
+//*[@id='modelSelectDropdown']//following-sibling::ul//child::li
+
+# instruction links
+//a[@class="instruction-link"]
+
+# instruction file links
+//a//a[contains(@href, '.pdf')]
