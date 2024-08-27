@@ -23,9 +23,22 @@ file_handler.setFormatter(file_formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
+url = 'http://127.0.0.1:8080/cars'
+
+
+def log_data(response, params, is_failed):
+    logger.info(f'GET {url} with params: {params}')
+    if is_failed:
+        logger.info(f'Response code: {response.status_code}')
+        logger.info(f'Response body items: {len(response.json())}\n')
+    else:
+        logger.error("Unexpected response")
+        logger.error(f'Response code: {response.status_code}')
+        logger.error(f'Response body items: {len(response.json())}\n')
+
 
 # authentification fixture
-@pytest.fixture(scope='class')
+@pytest.fixture(scope='session')
 def session():
     with requests.Session() as session:
         url = 'http://127.0.0.1:8080/auth'
@@ -49,8 +62,8 @@ def session():
     ('price', 1)
 ])
 def test_search_cars(session, sort_by, limit):
-    url = 'http://127.0.0.1:8080/cars'
     params = {'sort_by': sort_by, 'limit': limit}
+    is_failed = False
 
     # GET request with parameters
     response = session.get(url, params=params)
@@ -58,23 +71,18 @@ def test_search_cars(session, sort_by, limit):
 
     # logging request and responce
     if len(response_data[0]) == 4:
-        logger.info(f'\nGET {url} with params: {params}')
-        logger.info(f'Response code: {response.status_code}')
-        logger.info(f'Response body items: {len(response_data)}')
-    else:
-        logger.error("Unexpected response")
-        logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body items: {len(response_data)}\n')
+        is_failed = True
+    log_data(response, params, is_failed)
 
     # compare response length with requested limit
     assert len(response_data) == limit, "Unexpected response"
 
 
 def test_search_cars_zero_limit(session):
-    url = 'http://127.0.0.1:8080/cars'
     sort_by = 'brand'
     limit = 0
     params = {'sort_by': sort_by, 'limit': limit}
+    is_failed = False
 
     # GET request with parameters
     response = session.get(url, params=params)
@@ -82,34 +90,24 @@ def test_search_cars_zero_limit(session):
 
     # logging request and responce
     if len(response_data) == 0:
-        logger.info(f'GET {url} with params: {params}')
-        logger.info(f'Response code: {response.status_code}')
-        logger.info(f'Response body items: {len(response_data)}\n')
-    else:
-        logger.error("Unexpected response")
-        logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body items: {len(response_data)}\n')
+        is_failed = True
+    log_data(response, params, is_failed)
 
     # compare response length with reqiested limit
     assert len(response_data) == limit, "Unexpected response"
 
 
 def test_search_cars_absent_params(session):
-    url = 'http://127.0.0.1:8080/cars'
-
     # GET request without parameters
     response = session.get(url)
     response_data = response.json()
+    params = {}
+    is_failed = False
 
+    # logging request and responce
     if len(response_data[0]) == 4:
-        # logging request and responce
-        logger.info(f'GET {url} with absent params')
-        logger.info(f'Response code: {response.status_code}')
-        logger.info(f'Response body items: {len(response_data)}\n')
-    else:
-        logger.error("Unexpected response")
-        logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body items: {len(response_data)}\n')
+        is_failed = True
+    log_data(response, params, is_failed)
 
     # compare response length with requested limit
     assert len(response_data[0]) == 4, "Unexpected response"
@@ -117,22 +115,18 @@ def test_search_cars_absent_params(session):
 
 # Negative tests
 def test_search_cars_invalid_token():
-    url = 'http://127.0.0.1:8080/cars'
     headers = {'Authorization': 'Bearer invalid_token'}
     params = {'sort_by': 'price', 'limit': 5}
+    is_failed = False
 
     # GET request with invalid token
     response = requests.get(url, headers=headers, params=params)
 
     # logging request and responce
+
     if response.status_code == 422:
-        logger.info(f'GET {url} with invalid token')
-        logger.info(f'Response code: {response.status_code}')
-        logger.info(f'Response body: {response.json()}\n')
-    else:
-        logger.error("Unexpected response")
-        logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body: {response.json()}\n')
+        is_failed = True
+    log_data(response, params, is_failed)
 
     # check status code
     assert response.status_code == 422, "Request with invalid token should be unauthorized"
@@ -145,21 +139,15 @@ def test_search_cars_invalid_token():
     ({'sort_by': 'year', 'limit': 'not_a_number'}, 500)  # Невірний формат limit
 ])
 def test_search_cars_invalid_params(session, invalid_params, expected_status):
-    url = 'http://127.0.0.1:8080/cars'
-
     # GET request with incorrect parameters
     response = session.get(url, params=invalid_params)
-    pass
+    is_failed = False
+    params = {'sort_by': invalid_params, 'limit': expected_status}
 
     # logging request and responce
-    if response.status_code == 422:
-        logger.info(f'GET {url} with invalid params: {invalid_params}')
-        logger.info(f'Response code: {response.status_code}')
-        logger.info(f'Response body: {response.json()}\n')
-    else:
-        logger.error("Unexpected response")
-        logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body: {response.json()}\n')
+    if response.status_code == expected_status:
+        is_failed = True
+    log_data(response, params, is_failed)
 
     # Compare response with expected status code
     assert response.status_code == expected_status, f"Request with params {invalid_params} should return {expected_status}"
