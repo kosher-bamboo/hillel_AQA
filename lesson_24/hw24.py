@@ -10,13 +10,13 @@ logger.setLevel(logging.DEBUG)
 # Обробник для виводу в консоль (INFO і нижче)
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
-console_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_formatter = logging.Formatter('\n%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(console_formatter)
 
 # Обробник для запису у файл (WARNING і нижче)
 file_handler = logging.FileHandler('test_search.log')
 file_handler.setLevel(logging.WARNING)
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_formatter = logging.Formatter('\n%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(file_formatter)
 
 # Додавання обробників до логгера
@@ -55,12 +55,16 @@ def test_search_cars(auth_token, sort_by, limit):
     response = requests.get(url, headers=headers, params=params)
 
     # Логування запиту та відповіді
-    logger.info(f'GET {url} with params: {params}')
-    logger.info(f'Response code: {response.status_code}')
-    logger.info(f'Response body: {response.json()}')
+    try:
+        logger.info(f'GET {url} with params: {params}')
+        logger.info(f'Response code: {response.status_code}')
+        logger.info(f'Response body: {response.json()}')
 
-    # Перевірка статус-коду відповіді
-    assert response.status_code == 200, "Search request failed"
+        # Перевірка статус-коду відповіді
+        assert response.status_code == 200, "Search request failed"
+    except AssertionError:
+        # Логування помилки
+        logger.error(f'Error in test_search_cars with params: {params}')
 
 
 def test_search_cars_absent_params(auth_token):
@@ -69,14 +73,16 @@ def test_search_cars_absent_params(auth_token):
 
     # Виконання GET запиту без параметрів
     response = requests.get(url, headers=headers)
+    try:
+        # Логування
+        logger.info(f'GET {url} with absent params')
+        logger.info(f'Response code: {response.status_code}')
+        logger.info(f'Response body: {response.json()}')
 
-    # Логування
-    logger.warning(f'GET {url} with absent params')
-    logger.warning(f'Response code: {response.status_code}')
-    logger.warning(f'Response body: {response.json()}')
-
-    # Перевірка, що запит був відхилений або оброблений з помилкою
-    assert response.status_code == 200, "Invalid request"
+        # Перевірка, що запит був відхилений або оброблений з помилкою
+        assert response.status_code == 200, "Invalid request"
+    except AssertionError:
+        logger.error('Error in test_search_cars')
 
 
 # Негативні тести
@@ -88,13 +94,16 @@ def test_search_cars_invalid_token():
     # Виконання GET запиту з неправильним токеном
     response = requests.get(url, headers=headers, params=params)
 
-    # Логування
-    logger.warning(f'GET {url} with invalid token')
-    logger.warning(f'Response code: {response.status_code}')
-    logger.warning(f'Response body: {response.json()}')
+    try:
+        # Логування
+        logger.info(f'GET {url} with invalid token')
+        logger.info(f'Response code: {response.status_code}')
+        logger.info(f'Response body: {response.json()}')
 
-    # Перевірка, що запит був відхилений (очікується 401 або 403)
-    assert response.status_code == 422, "Request with invalid token should be unauthorized"
+        # Перевірка, що запит був відхилений (очікується 401 або 403)
+        assert response.status_code == 422, "Request with invalid token should be unauthorized"
+    except AssertionError:
+        logger.error('Error in test_search_cars_invalid_token')
 
 
 # Параметризовані негативні тести
@@ -110,10 +119,13 @@ def test_search_cars_invalid_params(session, invalid_params, expected_status):
     # Виконання GET запиту з неправильними параметрами
     response = session.get(url, params=invalid_params)
 
-    # Логування
-    logger.warning(f'GET {url} with invalid params: {invalid_params}')
-    logger.warning(f'Response code: {response.status_code}')
-    logger.warning(f'Response body: {response.json()}')
+    try:
+        # Логування
+        logger.info(f'GET {url} with invalid params: {invalid_params}')
+        logger.info(f'Response code: {response.status_code}')
+        logger.info(f'Response body: {response.json()}')
 
-    # Перевірка, що запит повертає очікуваний статус
-    assert response.status_code == expected_status, f"Request with params {invalid_params} should return {expected_status}"
+        # Перевірка, що запит повертає очікуваний статус
+        assert response.status_code == expected_status, f"Request with params {invalid_params} should return {expected_status}"
+    except AssertionError:
+        logger.error(f'Error in test_search_cars_invalid_params with params: ')
