@@ -3,28 +3,28 @@ import requests
 from requests.auth import HTTPBasicAuth
 import logging
 
-# Налаштування логування
+# logging setting
 logger = logging.getLogger('API Test')
 logger.setLevel(logging.DEBUG)
 
-# Обробник для виводу в консоль (INFO і нижче)
+# console handler setup
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 console_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 console_handler.setFormatter(console_formatter)
 
-# Обробник для запису у файл (WARNING і нижче)
+# file handler setup
 file_handler = logging.FileHandler('test_search.log')
 file_handler.setLevel(logging.ERROR)
 file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(file_formatter)
 
-# Додавання обробників до логгера
+# add handlers to the logger
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
 
-# Фікстура для аутентифікації (scope='class')
+# authentification fixture
 @pytest.fixture(scope='class')
 def session():
     with requests.Session() as session:
@@ -36,11 +36,12 @@ def session():
         token = response.json().get('access_token')
         if not token:
             pytest.fail("No access token found in response")
+        # save token in headers
         session.headers.update({'Authorization': f'Bearer {token}'})
         yield session
 
 
-# Параметри для позитивних тестів
+# positive tests parameters
 @pytest.mark.parametrize("sort_by, limit", [
     ('brand', 5),
     ('year', 10),
@@ -49,39 +50,38 @@ def session():
 ])
 def test_search_cars(session, sort_by, limit):
     url = 'http://127.0.0.1:8080/cars'
-    # headers = {'Authorization': f'Bearer {auth_token}'}
     params = {'sort_by': sort_by, 'limit': limit}
 
-    # Виконання GET запиту
+    # GET request with parameters
     response = session.get(url, params=params)
     response_data = response.json()
 
+    # logging request and responce
     if len(response_data[0]) == 4:
-        # Логування запиту та відповіді
         logger.info(f'\nGET {url} with params: {params}')
         logger.info(f'Response code: {response.status_code}')
         logger.info(f'Response body items: {len(response_data)}')
     else:
-        logger.error("\nUnexpected response")
+        logger.error("Unexpected response")
         logger.error(f'Response code: {response.status_code}')
-        logger.error(f'Response body items: {len(response_data)}')
+        logger.error(f'Response body items: {len(response_data)}\n')
 
+    # compare response length with requested limit
     assert len(response_data) == limit, "Unexpected response"
 
 
 def test_search_cars_zero_limit(session):
     url = 'http://127.0.0.1:8080/cars'
-    # headers = {'Authorization': f'Bearer {auth_token}'}
     sort_by = 'brand'
     limit = 0
     params = {'sort_by': sort_by, 'limit': limit}
 
-    # Виконання GET запиту
+    # GET request with parameters
     response = session.get(url, params=params)
     response_data = response.json()
 
+    # logging request and responce
     if len(response_data) == 0:
-        # Логування запиту та відповіді
         logger.info(f'GET {url} with params: {params}')
         logger.info(f'Response code: {response.status_code}')
         logger.info(f'Response body items: {len(response_data)}\n')
@@ -90,19 +90,19 @@ def test_search_cars_zero_limit(session):
         logger.error(f'Response code: {response.status_code}')
         logger.error(f'Response body items: {len(response_data)}\n')
 
+    # compare response length with reqiested limit
     assert len(response_data) == limit, "Unexpected response"
 
 
 def test_search_cars_absent_params(session):
     url = 'http://127.0.0.1:8080/cars'
-    # headers = {'Authorization': f'Bearer {auth_token}'}
 
-    # Виконання GET запиту без параметрів
+    # GET request without parameters
     response = session.get(url)
     response_data = response.json()
 
     if len(response_data[0]) == 4:
-        # Логування
+        # logging request and responce
         logger.info(f'GET {url} with absent params')
         logger.info(f'Response code: {response.status_code}')
         logger.info(f'Response body items: {len(response_data)}\n')
@@ -110,20 +110,21 @@ def test_search_cars_absent_params(session):
         logger.error("Unexpected response")
         logger.error(f'Response code: {response.status_code}')
         logger.error(f'Response body items: {len(response_data)}\n')
-    # Перевірка, що запит був відхилений або оброблений з помилкою
+
+    # compare response length with requested limit
     assert len(response_data[0]) == 4, "Unexpected response"
 
 
-# Негативні тести
+# Negative tests
 def test_search_cars_invalid_token():
     url = 'http://127.0.0.1:8080/cars'
     headers = {'Authorization': 'Bearer invalid_token'}
     params = {'sort_by': 'price', 'limit': 5}
 
-    # Виконання GET запиту з неправильним токеном
+    # GET request with invalid token
     response = requests.get(url, headers=headers, params=params)
 
-    # Логування
+    # logging request and responce
     if response.status_code == 422:
         logger.info(f'GET {url} with invalid token')
         logger.info(f'Response code: {response.status_code}')
@@ -133,11 +134,11 @@ def test_search_cars_invalid_token():
         logger.error(f'Response code: {response.status_code}')
         logger.error(f'Response body: {response.json()}\n')
 
-    # Перевірка, що запит був відхилений (очікується 401 або 403)
+    # check status code
     assert response.status_code == 422, "Request with invalid token should be unauthorized"
 
 
-# Параметризовані негативні тести
+# Parametrized negative tests
 @pytest.mark.parametrize("invalid_params, expected_status", [
     ({'sort_by': 'invalid_param', 'limit': 5}, 422),  # Неправильний sort_by
     ({'sort_by': 'price', 'limit': -1}, 422),  # Неправильний limit
@@ -146,11 +147,11 @@ def test_search_cars_invalid_token():
 def test_search_cars_invalid_params(session, invalid_params, expected_status):
     url = 'http://127.0.0.1:8080/cars'
 
-    # Виконання GET запиту з неправильними параметрами
+    # GET request with incorrect parameters
     response = session.get(url, params=invalid_params)
     pass
 
-    # Логування
+    # logging request and responce
     if response.status_code == 422:
         logger.info(f'GET {url} with invalid params: {invalid_params}')
         logger.info(f'Response code: {response.status_code}')
@@ -160,5 +161,5 @@ def test_search_cars_invalid_params(session, invalid_params, expected_status):
         logger.error(f'Response code: {response.status_code}')
         logger.error(f'Response body: {response.json()}\n')
 
-    # Перевірка, що запит повертає очікуваний статус
+    # Compare response with expected status code
     assert response.status_code == expected_status, f"Request with params {invalid_params} should return {expected_status}"
