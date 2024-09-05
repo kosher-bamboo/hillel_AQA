@@ -8,10 +8,5 @@ def driver():
 
 
 @pytest.fixture(scope='session')
-def url():
-    return 'https://tracking.novaposhta.ua/#/uk'
-
-
-@pytest.fixture(scope='session')
 def track_number():
     return '20450952733334'
