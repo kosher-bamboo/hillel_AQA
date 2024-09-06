@@ -3,10 +3,10 @@ from lesson_27.UI.novaposhta.tracking_page import TrackingPage
 tracking_number = '20450952733334'
 
 
-def test_search_by_track_number(driver, url):
-    tracking_page = TrackingPage(driver, url).open_page()
+def test_search_by_track_number(driver):
+    tracking_page = TrackingPage(driver).open_page()
 
-    assert tracking_page.current_page_url() == url
+    assert tracking_page.current_page_url() == TrackingPage(driver).url
 
     tracking_page.fill_input_field(tracking_number).click_search_button()
     get_status = tracking_page.click_agree_button().get_status()

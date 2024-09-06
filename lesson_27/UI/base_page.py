@@ -27,3 +27,6 @@ class BasePage:
     def input_data(self, locator, data, timeout=3):
         element = self._element_is_present(locator=locator, timeout=timeout)
         element.send_keys(data)
+
+    def get_text(self, locator, timeout=2):
+        return self._element_is_present(locator=locator, timeout=2).text

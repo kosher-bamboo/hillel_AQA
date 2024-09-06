@@ -1,10 +1,10 @@
 from lesson_27.UI.novaposhta.elements.tracking_page_elements import TrackingPageElements
-from lesson_27.UI.novaposhta.novaposhta_base_page import NovaposhtaBasePage
+from lesson_27.UI.base_page import BasePage
 
 
-class TrackingPage(NovaposhtaBasePage):
+class TrackingPage(BasePage):
     def __init__(self, driver):
-        super().__init__(driver=driver)
+        super().__init__(driver=driver, url='https://tracking.novaposhta.ua/#/uk')
         self.elements = TrackingPageElements()
 
     def fill_input_field(self, data):
@@ -20,4 +20,4 @@ class TrackingPage(NovaposhtaBasePage):
         return self
 
     def get_status(self):
-        return self.driver.find_element(*self.elements.STATUS).text
+        return self.get_text(locator=self.elements.STATUS)
