@@ -20,18 +20,19 @@ logger.addHandler(file_handler)
 
 name = fake.first_name()
 last_name = fake.last_name()
-# email=fake.email()
-email='email@mail.com'
-# password=fake.password()
-password='Qwerty123'
+email = fake.email()
+password = fake.password()
+
 
 def test_forstudy_sign_up(driver, open_main_page, register_user, log_out_user, log_in_user):
     open_main_page()
-    register_user(name=name, last_name=last_name, email=fake.email(), password=password)
+    register_user(name=name, last_name=last_name, email=email, password=password)
     logger.info(f"Registered user: name:{name}, last name {last_name}, email: {email}, password: {password}")
+    # time.sleep(1)
+    # assert check_that_user_is_registered(), "User not registered"
 
     log_out_user()
 
     log_in_user(email=email, password=password)
     logger.info(f"Try to login with email: {email}, password: {password}")
-    time.sleep(5)
+    # time.sleep(60)

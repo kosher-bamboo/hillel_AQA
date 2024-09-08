@@ -48,3 +48,12 @@ def log_out_user(driver):
 
     return _log_out_user
 
+
+@pytest.fixture(scope='session')
+def check_that_user_is_registered(driver):
+    def _check_that_user_is_registered():
+        garage_page = GaragePage(driver)
+        garage_page.check_login_state()
+        pass
+
+    return _check_that_user_is_registered

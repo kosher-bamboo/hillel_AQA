@@ -7,3 +7,4 @@ class ForstudyGaragePageElements:
     # /panel/profile
     LINK_TO_PROFILE = (By.XPATH, '//div[@class="user-nav_menu-group"]//a[@href="/panel/profile"]')
     LOG_OUT = (By.XPATH, '//button[@class="dropdown-item btn btn-link user-nav_link"]')
+    SUCCESSFUL_LOGIN_NOTIFICATION = (By.XPATH, '//p[text()="Registration complete"]')

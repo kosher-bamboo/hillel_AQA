@@ -22,3 +22,12 @@ class GaragePage(BasePage):
     def click_profile_url(self):
         self.click_on_element(locator=self.elements.LINK_TO_PROFILE, timeout=2)
         return self
+
+
+    # def check_notification(self):
+        # return self.get_text(locator=self.elements.SUCCESSFUL_LOGIN_NOTIFICATION, timeout=1) == "Registration complete"
+
+
+    def check_login_state(self, base_url):
+        self.current_page_url() == base_url + "panel/garage"
+        return self
