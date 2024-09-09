@@ -10,6 +10,13 @@ class ForstudySignUpElements:
     RE_ENTER_PASSWORD_INPUT_FIELD = (By.ID, 'signupRepeatPassword')
     REGISTER_BUTTON = (By.XPATH, '//button[@class="btn btn-primary"]')
 
+    NAME_REQUIRED = (By.XPATH, '//p[text()="Name required"]')
+    LAST_NAME_REQUIRED = (By.XPATH, '//p[text()="Last name required"]')
+    EMAIL_REQUIRED = (By.XPATH, '//p[text()="Email required"]')
+    PASSWORD_REQUIRED = (By.XPATH, '//p[text()="Password required"]')
+    RE_ENTER_PASSWORD_REQUIRED = (By.XPATH, '//p[text()="Re-enter password required"]')
+    PASSWORD_HAS_TO_BE = (By.XPATH, '//p[text()="Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"]')
+
 
 class ForstudySignInElements:
     SIGN_IN_BUTTON = (By.XPATH, '//button[@class="btn btn-outline-white header_signin"]')

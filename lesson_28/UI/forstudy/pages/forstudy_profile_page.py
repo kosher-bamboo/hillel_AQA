@@ -1,23 +1,18 @@
-from selenium.webdriver.common.by import By
+from lesson_28.UI.base_page import BasePage
+from lesson_28.UI.forstudy.elements.forstudy_profile_page_elements import ForstudyProfilePageElements
 
-class ProfilePage:
+
+class ProfilePage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver=driver)
+        self.elements = ForstudyProfilePageElements()
 
+    def get_user_name(self):
+        asd = self.get_text(locator=self.elements.USER_FULL_NAME, timeout=2)
+        asdf = asd.split()
+        return asdf[0]
 
-    def click_edit_profile_button(self):
-        pass
-
-
-    def get_name(self):
-        pass
-
-
-    def get_last_name(self):
-        pass
-
-
-    def click_close_button(self):
-        pass
-
-
+    def get_user_last_name(self):
+        asd = self.get_text(locator=self.elements.USER_FULL_NAME, timeout=2)
+        asdf = asd.split()
+        return asdf[1]
