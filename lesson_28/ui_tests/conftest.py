@@ -8,14 +8,14 @@ from lesson_28.UI.forstudy.pages.forstudy_log_in_page import LogInPage
 from lesson_28.UI.forstudy.pages.forstudy_garage_page import GaragePage
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def driver():
     driver = webdriver.Chrome()
     yield driver
     driver.quit()
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def open_main_page(driver):
     def _open_main_page():
         driver.maximize_window()
@@ -24,7 +24,7 @@ def open_main_page(driver):
     return _open_main_page
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def register_user(driver):
     def _register_user(name, last_name, email, password):
         sign_up_page = SignUpPage(driver)
@@ -34,7 +34,7 @@ def register_user(driver):
     return _register_user
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def log_in_user(driver):
     def _log_in_user(email, password):
         log_in_page = LogInPage(driver)
@@ -43,7 +43,7 @@ def log_in_user(driver):
     return _log_in_user
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def log_out_user(driver):
     def _log_out_user():
         garage_page = GaragePage(driver)
@@ -52,7 +52,7 @@ def log_out_user(driver):
     return _log_out_user
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def check_user_is_logged_in(driver):
     def _check_user_is_logged_in():
         garage_page = GaragePage(driver)
@@ -62,7 +62,7 @@ def check_user_is_logged_in(driver):
     return _check_user_is_logged_in
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def check_name(driver):
     def _check_name():
         garage_page = GaragePage(driver)
@@ -74,7 +74,7 @@ def check_name(driver):
     return _check_name
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def check_last_name(driver):
     def _check_last_name():
         garage_page = GaragePage(driver)
@@ -86,7 +86,7 @@ def check_last_name(driver):
     return _check_last_name
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture(scope='function')
 def remove_account(driver):
     def _remove_account():
         garage_page = GaragePage(driver)
