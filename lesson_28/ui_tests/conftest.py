@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 from lesson_28.config import BASE_URL, GARAGE_PAGE_URL
-from lesson_28.UI.forstudy.elements.forstudy_main_page_elements import ForstudySignUpElements
 from lesson_28.UI.forstudy.pages.forstudy_profile_page import ProfilePage
 from lesson_28.UI.forstudy.pages.forstudy_remove_account_page import RemoveAccountPage
 from lesson_28.UI.forstudy.pages.forstudy_sign_up_page import SignUpPage
@@ -16,7 +15,7 @@ def driver():
     driver.quit()
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='session')
 def open_main_page(driver):
     def _open_main_page():
         driver.maximize_window()
@@ -95,6 +94,5 @@ def remove_account(driver):
 
         garage_page.click_settings()
         settings.click_delete_my_account().click_remove()
-        # return profile_page.get_user_last_name()
 
     return _remove_account

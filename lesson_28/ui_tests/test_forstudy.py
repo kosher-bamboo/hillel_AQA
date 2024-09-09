@@ -25,7 +25,7 @@ def test_forstudy_sign_up(driver, open_main_page, register_user, check_user_is_l
 
     assert check_user_is_logged_in, "User isn't logged in"
 
-    remove_account()
+    # remove_account()
 
 
 @pytest.mark.parametrize("field, expected_value", [
@@ -35,14 +35,13 @@ def test_forstudy_sign_up(driver, open_main_page, register_user, check_user_is_l
 def test_forstudy_check_name(driver, open_main_page, register_user, log_in_user, check_name, check_last_name,
                              field, expected_value, remove_account):
     if field == "name":
-        open_main_page()
-        register_user(name=name, last_name=last_name, email=email, password=password)
-        logger.info(f"Registered user: name: {name}, last name: {last_name}, email: {email}, password: {password}")
+        # open_main_page()
+        # register_user(name=name, last_name=last_name, email=email, password=password)
+        # logger.info(f"Registered user: name: {name}, last name: {last_name}, email: {email}, password: {password}")
 
         assert check_name() == expected_value, f"Expected {expected_value} but found {check_name()}"
 
     if field == "last_name":
         actual_last_name = check_last_name()
         remove_account()
-        assert actual_last_name == expected_value, f"Expected {expected_value}, but found {check_last_name()}"
-
+        assert actual_last_name == expected_value, f"Expected {expected_value}, but found {actual_last_name}"
