@@ -1,28 +1,33 @@
-import time
+import pytest
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.alert import Alert
 
-driver = Chrome()
 
-driver.get("http://localhost:8000/dz.html")
+@pytest.fixture()
+def driver():
+    driver = Chrome()
+    yield driver
+    driver.quit()
 
-# get all iframes from main page
-iframes = driver.find_elements(By.XPATH, "//*[contains(@id, 'frame')]")
-for iframe in iframes:
-    # get id of the iframe
-    iframe_id = iframe.get_attribute('id')
-    driver.switch_to.frame(driver.find_element(By.ID, iframe_id))
-    input_field = driver.find_element(By.ID, f"input{iframe_id[-1]}")
-    input_field.send_keys(f"Frame{iframe_id[-1]}_Secret")
+
+url = "http://localhost:8000/dz.html"
+
+
+@pytest.mark.parametrize("frame, input, secret, expected", [
+    ("frame1", "input1", "Frame1_Secret", "Верифікація пройшла успішно!"),
+    ("frame2", "input2", "Frame2_Secret", "Верифікація пройшла успішно!")
+], ids=["frame1", "frame2"])
+def test_check_alert(driver, frame, input, secret, expected):
+    driver.get(url)
+    driver.find_element(By.ID, frame)
+    driver.switch_to.frame(driver.find_element(By.ID, frame))
+    input_field = driver.find_element(By.ID, input)
+    input_field.send_keys(secret)
     button = driver.find_element(By.TAG_NAME, 'button')
     button.click()
-    time.sleep(1)
+    alert = driver.switch_to.alert
 
-    alert = Alert(driver)
-    if alert.text == f"Верифікація пройшла успішно!":
-        print(alert.text)
-    else:
-        print(alert.text)
+    assert alert.text == expected, "Incorrect text input"
+
     alert.accept()
-    driver.switch_to.default_content()
+    driver.quit()
