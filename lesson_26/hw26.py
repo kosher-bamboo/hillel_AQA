@@ -30,4 +30,3 @@ def test_check_alert(driver, frame, input, secret, expected):
     assert alert.text == expected, "Incorrect text input"
 
     alert.accept()
-    driver.quit()
