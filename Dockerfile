@@ -9,5 +9,6 @@ RUN pip install psycopg2
 CMD ["pytest"]
 
 RUN pip install psycopg2
+RUN pip install pytest
 
 CMD ["pytest", "-vv", "db_docker_file.py"]
