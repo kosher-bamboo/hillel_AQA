@@ -1,10 +1,13 @@
 import psycopg2
 import os
 from test_data import create_table_categories, create_table_products, insert_into_categories, insert_into_products
-
 import pytest
+import allure
 
 
+@allure.epic("Database tests")
+@allure.feature("Container DB connection tests")
+@allure.story("Database connection")
 def test_database_connection():
     database_url = os.getenv('DATABASE_URL')
     conn = psycopg2.connect(database_url)
@@ -12,6 +15,9 @@ def test_database_connection():
     assert conn is not None
 
 
+@allure.epic("Database tests")
+@allure.feature("Container DB connection tests")
+@allure.story("Table creation")
 def test_table_creation():
     database_url = os.getenv('DATABASE_URL')
     conn = psycopg2.connect(database_url)
@@ -24,6 +30,9 @@ def test_table_creation():
     assert result is not None
 
 
+@allure.epic("Database tests")
+@allure.feature("Container DB connection tests")
+@allure.story("Data manipulation")
 @pytest.mark.parametrize("query, expected", [
     ("INSERT INTO users (user_id, name) VALUES (1, 'John')", "John"),
     ("UPDATE users SET name = 'John2' WHERE user_id = 1", "John2"),
@@ -47,6 +56,9 @@ def test_data_manipulation(query, expected):
     conn.close()
 
 
+@allure.epic("Database tests")
+@allure.feature("Container DB connection tests")
+@allure.story("Data selection")
 @pytest.mark.parametrize("query, expected", [
     ("SELECT * FROM categories", 0),
     ("SELECT * FROM products", 0),
