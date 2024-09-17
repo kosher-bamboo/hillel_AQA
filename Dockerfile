@@ -29,5 +29,4 @@ RUN pip install psycopg2
 RUN pip install pytest
 RUN pip install allure-pytest
 
-CMD pytest -vv db_docker_file.py
-#--alluredir=allure-results && allure generate --clean
+CMD pytest -vv db_docker_file.py --alluredir=allure-results && allure generate --clean
