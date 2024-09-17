@@ -1,10 +1,14 @@
 import unittest
+import allure
 
 from lesson_07.homework_07 import arithmetic_mean
 
+@allure.epic("Unit tests")
+@allure.feature("Arithmetic Mean Tests")
+@allure.story("Negative Tests")
+class ArithmeticMeanNegativeTest(unittest.TestCase):
 
-class ArithmenicMeanNegativeTest(unittest.TestCase):
-
+    @allure.title("Empty input")
     def test_arithmetic_mean_string(self):
 
         expected_result = "division by zero"
@@ -15,6 +19,7 @@ class ArithmenicMeanNegativeTest(unittest.TestCase):
 
         self.assertEqual(result, expected_result)
 
+    @allure.title("Input: list")
     def test_arithmetic_mean_list(self):
 
         input_value = ["2", "f"]
@@ -27,5 +32,5 @@ class ArithmenicMeanNegativeTest(unittest.TestCase):
         self.assertEqual(error_message, expected_result)
 
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
