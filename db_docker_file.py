@@ -5,9 +5,9 @@ import pytest
 import allure
 
 
-@allure.epic("Database tests")
-@allure.feature("Container DB connection tests")
-@allure.story("Database connection")
+# @allure.epic("Database tests")
+# @allure.feature("Container DB connection tests")
+# @allure.story("Database connection")
 def test_database_connection():
     database_url = os.getenv('DATABASE_URL')
     conn = psycopg2.connect(database_url)
@@ -15,24 +15,26 @@ def test_database_connection():
     assert conn is not None
 
 
-@allure.epic("Database tests")
-@allure.feature("Container DB connection tests")
-@allure.story("Table creation")
+# @allure.epic("Database tests")
+# @allure.feature("Container DB connection tests")
+# @allure.story("Table creation")
 def test_table_creation():
     database_url = os.getenv('DATABASE_URL')
     conn = psycopg2.connect(database_url)
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE IF EXISTS users;")
+    # cursor.execute("DROP TABLE IF EXISTS users;")
     cursor.execute("""CREATE TABLE users (user_id int NOT NULL, name VARCHAR NOT NULL);""")
+    conn.commit()
     cursor.execute("SELECT * FROM users")
+    conn.commit()
 
     result = cursor.fetchall()
     assert result is not None
 
 
-@allure.epic("Database tests")
-@allure.feature("Container DB connection tests")
-@allure.story("Data manipulation")
+# @allure.epic("Database tests")
+# @allure.feature("Container DB connection tests")
+# @allure.story("Data manipulation")
 @pytest.mark.parametrize("query, expected", [
     ("INSERT INTO users (user_id, name) VALUES (1, 'John')", "John"),
     ("UPDATE users SET name = 'John2' WHERE user_id = 1", "John2"),
@@ -56,9 +58,9 @@ def test_data_manipulation(query, expected):
     conn.close()
 
 
-@allure.epic("Database tests")
-@allure.feature("Container DB connection tests")
-@allure.story("Data selection")
+# @allure.epic("Database tests")
+# @allure.feature("Container DB connection tests")
+# @allure.story("Data selection")
 @pytest.mark.parametrize("query, expected", [
     ("SELECT * FROM categories", 0),
     ("SELECT * FROM products", 0),
