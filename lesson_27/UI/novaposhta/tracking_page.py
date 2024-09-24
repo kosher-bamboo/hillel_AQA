@@ -2,8 +2,10 @@ import allure
 
 from lesson_27.UI.novaposhta.elements.tracking_page_elements import TrackingPageElements
 from lesson_27.UI.base_page import BasePage
+import allure
 
 
+@allure.epic("Tracking Page")
 class TrackingPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver=driver, url='https://tracking.novaposhta.ua/#/uk')
