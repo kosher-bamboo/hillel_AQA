@@ -17,3 +17,6 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://test_user:test_password@db:5432/test_db
+    volumes:
+      - /home/alexander/PycharmProjects/hillel_AQA/allure-results:/app/allure-results
+      - /home/alexander/PycharmProjects/hillel_AQA/allure-report:/app/allure-report
