@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Install python') {
             steps {
+                sh 'apt update'
                 sh 'apt-get install -y python3 python3-dev'
                 sh 'apt-get install -y python3-pip'
                 sh 'rm -rf venv'
