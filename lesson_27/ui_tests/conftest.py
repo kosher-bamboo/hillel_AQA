@@ -1,23 +1,10 @@
 import pytest
 from selenium.webdriver import Chrome
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 
 
 @pytest.fixture(scope='session')
 def driver():
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')  # Run Chrome in headless mode
-    chrome_options.add_argument('--no-sandbox')  # Important for running in Jenkins
-    chrome_options.add_argument('--disable-dev-shm-usage')  # For better memory usage
-
-    driver = webdriver.Chrome(options=chrome_options)
-
-    yield driver
-    driver.quit()
-    # = webdriver.Chrome
-    # return webdriver.Chrome()
-    # return Chrome()
+    return Chrome()
 
 
 @pytest.fixture(scope='session')
