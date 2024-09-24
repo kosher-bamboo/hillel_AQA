@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'homework31', url: 'https://github.com/kosher-bamboo/hillel_AQA.git'
+                git branch: 'homework31_new', url: 'https://github.com/kosher-bamboo/hillel_AQA.git'
             }
         }
         stage('Install python') {
