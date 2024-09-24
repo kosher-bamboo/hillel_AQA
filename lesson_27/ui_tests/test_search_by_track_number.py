@@ -1,8 +1,10 @@
 from lesson_27.UI.novaposhta.tracking_page import TrackingPage
-
+import allure
 tracking_number = '20450952733334'
 
-
+@allure.epic("UI Tests")
+@allure.feature("Package status by track number")
+@allure.title("Search by track number")
 def test_search_by_track_number(driver):
     tracking_page = TrackingPage(driver).open_page()
 
