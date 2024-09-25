@@ -1,20 +1,29 @@
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from lesson_28.config import BASE_URL, GARAGE_PAGE_URL
 from lesson_28.UI.forstudy.pages.forstudy_profile_page import ProfilePage
 from lesson_28.UI.forstudy.pages.forstudy_remove_account_page import RemoveAccountPage
 from lesson_28.UI.forstudy.pages.forstudy_sign_up_page import SignUpPage
 from lesson_28.UI.forstudy.pages.forstudy_log_in_page import LogInPage
 from lesson_28.UI.forstudy.pages.forstudy_garage_page import GaragePage
+import allure
 
 
 @pytest.fixture(scope='function')
 def driver():
-    driver = webdriver.Chrome()
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')  # Run Chrome in headless mode
+    chrome_options.add_argument('--no-sandbox')  # Important for running in Jenkins
+    chrome_options.add_argument('--disable-dev-shm-usage')  # For better memory usage
+
+    driver = webdriver.Chrome(options=chrome_options)
+
     yield driver
     driver.quit()
 
 
+@allure.step("Open main page")
 @pytest.fixture(scope='function')
 def open_main_page(driver):
     def _open_main_page():
@@ -24,6 +33,7 @@ def open_main_page(driver):
     return _open_main_page
 
 
+@allure.title("Register user")
 @pytest.fixture(scope='function')
 def register_user(driver):
     def _register_user(name, last_name, email, password):
@@ -34,6 +44,7 @@ def register_user(driver):
     return _register_user
 
 
+@allure.title("Log in user")
 @pytest.fixture(scope='function')
 def log_in_user(driver):
     def _log_in_user(email, password):
@@ -43,6 +54,7 @@ def log_in_user(driver):
     return _log_in_user
 
 
+@allure.title("Log out user")
 @pytest.fixture(scope='function')
 def log_out_user(driver):
     def _log_out_user():
@@ -52,6 +64,7 @@ def log_out_user(driver):
     return _log_out_user
 
 
+@allure.title("Check if user logged in")
 @pytest.fixture(scope='function')
 def check_user_is_logged_in(driver):
     def _check_user_is_logged_in():
@@ -62,6 +75,7 @@ def check_user_is_logged_in(driver):
     return _check_user_is_logged_in
 
 
+@allure.title("Check name")
 @pytest.fixture(scope='function')
 def check_name(driver):
     def _check_name():
@@ -74,6 +88,7 @@ def check_name(driver):
     return _check_name
 
 
+@allure.title("Check last name")
 @pytest.fixture(scope='function')
 def check_last_name(driver):
     def _check_last_name():
@@ -86,6 +101,7 @@ def check_last_name(driver):
     return _check_last_name
 
 
+@allure.title("Remove account")
 @pytest.fixture(scope='function')
 def remove_account(driver):
     def _remove_account():
